@@ -39,7 +39,14 @@ io.on('connection', function(socket) {
 
     socket.on('i am client', console.log);
 
-    socket.on("start", function(socket) {
+    socket.on('STARTFROMCONTROLPANEL', (socket) => {
+            //pass data to UNITY
             console.log("start");
     });
+
+    socket.on('STOPFROMCONTROLPANEL', (socket) => {
+        //pass data to UNITY
+            console.log("stop");
+    });
+
 });
