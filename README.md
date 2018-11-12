@@ -1,5 +1,5 @@
 ## INSTALL
-node install
+npm install
 
 ## RUN
-node start
+npm start
