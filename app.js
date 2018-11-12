@@ -39,14 +39,16 @@ io.on('connection', function(socket) {
 
     socket.on('i am client', console.log);
 
-    socket.on('STARTFROMCONTROLPANEL', (socket) => {
+    socket.on('STARTFROMCONTROLPANEL', (data) => {
             //pass data to UNITY
             console.log("start");
+            socket.emit('STARTTOUNITY', {data: 'foo!'});
     });
 
-    socket.on('STOPFROMCONTROLPANEL', (socket) => {
+    socket.on('STOPFROMCONTROLPANEL', (data) => {
         //pass data to UNITY
             console.log("stop");
+            socket.emit('STOPTOUNITY', {data: 'foo!'});
     });
 
 });
