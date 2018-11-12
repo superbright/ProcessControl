@@ -1,0 +1,39 @@
+<!doctype html>
+html
+    head
+        link(rel="stylesheet", href="./mdl/material.min.css")
+        link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+        script.
+            var socket = io();
+
+            //use this to register which computer you are
+            socket.on('welcome', function(data) {
+                addMessage(data.message);
+
+                // Respond with a message including this clients' id sent from the server
+                socket.emit('i am client', {data: 'foo!', id: data.id});
+            });
+            socket.on('time', function(data) {
+                addMessage(data.time);
+            });
+            socket.on('error', console.error.bind(console));
+            socket.on('message', console.log.bind(console));
+
+            function addMessage(message) {
+                var text = document.createTextNode(message),
+                    el = document.createElement('li'),
+                    messages = document.getElementById('messages');
+
+                el.appendChild(text);
+                messages.appendChild(el);
+            }
+    body
+        div(class="mdl-grid")
+            div(class="mdl-cell mdl-cell--2-col") 
+                button(class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored") START
+            div(class="mdl-cell mdl-cell--2-col") 
+                button(class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored") STOP
+        ul#messages
+            
